@@ -17,8 +17,8 @@ fi
 
 while true
  do
- clear
- date
- python cl_adsb.py
- sleep $1
-done
+  clear
+  date
+  python cl_adsb.py
+  sleep $1
+ done
