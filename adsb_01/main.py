@@ -96,12 +96,12 @@ if __name__ == '__main__':
     adsb.parse()
 
     # Setup Pretty lille table
-    x = PrettyTable(["Icao", "Reg", "Call", "Sqk", "Alt", "Op", "Mil", "Lat", "Long"])
-    x.align["Op"] = "l"
-    x.align["Reg"] = "l"
-    x.align["Call"] = "l"
-    x.align["Alt"] = "l"
-    x.align["Sqk"] = "l"
+    planes_table = PrettyTable(["Icao", "Reg", "Call", "Sqk", "Alt", "Op", "Mil", "Lat", "Long"])
+    planes_table.align["Op"] = "l"
+    planes_table.align["Reg"] = "l"
+    planes_table.align["Call"] = "l"
+    planes_table.align["Alt"] = "l"
+    planes_table.align["Sqk"] = "l"
 
     # Lets count military and Slovenian aircraft
     m_count = 0
@@ -114,19 +114,21 @@ if __name__ == '__main__':
             slo_count += 1
         if plane.get_data("Op") is not None and len(plane.get_data("Op")) > 11:
             plane.Op = plane.get_data("Op")[:7] + " ..."
-        x.add_row([plane.get_data("Icao") if not plane.get_data("Icao").startswith("506") else
-                                                 add_color(plane.get_data("Icao"), color=bcolors.OKBLUE),
-                   plane.get_data("Reg"),
-                   plane.get_data("Call"),
-                   plane.get_data("Sqk"),
-                   feet_to_meters(plane.get_data("Alt"), to_int=True),
-                   plane.get_data("Op"),
-                   plane.get_data("Mil") if not plane.get_data("Mil") else add_color(plane.get_data("Mil"),
-                                                                                     color=bcolors.WARNING),
-                   plane.get_data("Lat"),
-                   plane.get_data("Long")])
 
-    print x
+        # Fill row with plane data
+        planes_table.add_row([plane.get_data("Icao") if not plane.get_data("Icao").startswith("506") else
+                                                            add_color(plane.get_data("Icao"), color=bcolors.OKBLUE),
+                              plane.get_data("Reg"),
+                              plane.get_data("Call"),
+                              plane.get_data("Sqk"),
+                              feet_to_meters(plane.get_data("Alt"), to_int=True),
+                              plane.get_data("Op"),
+                              plane.get_data("Mil") if not plane.get_data("Mil") else add_color(plane.get_data("Mil"),
+                                                                                     color=bcolors.WARNING),
+                              plane.get_data("Lat"),
+                              plane.get_data("Long")])
+
+    print planes_table
     print "Mill count: " + str(m_count)
     print "Slo count:  " + str(slo_count)
     # plane.show_all_data()
