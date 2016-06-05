@@ -5,6 +5,8 @@
 Command line tool to show adsb aircraft information in a nice table.
 Easy configurable and upgradable, please see script itself.
 
+![alt text](http://i.imgur.com/urKAuWn.png "CL-ADSB")
+
 You must have [VirtualRadar](http://www.virtualradarserver.co.uk/download.aspx) running (It works on Linux under Wine).
 CL-ADSB parses AircraftList.json feed coming from VirtualRadar server. If you have or find a public server just replace
 **http://sdrsharp.com:8080/virtualradar/desktop.html**
