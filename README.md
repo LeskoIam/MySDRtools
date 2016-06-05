@@ -13,7 +13,7 @@ CL-ADSB parses AircraftList.json feed coming from VirtualRadar server. If you ha
 with
 **http://sdrsharp.com:8080/virtualradar/AircraftList.json**
 
-To configure the server open cl_adsb.py file and under the end change
+To configure the server open cl_adsb.py file and close to the end change
 ```python
 adsb = AdsB("http://192.168.1.55:8080/VirtualRadar/AircraftList.json")
 ```
