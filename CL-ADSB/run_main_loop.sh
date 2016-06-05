@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-echo 'CLADSB tool'
+echo 'CL-ADSB tool'
 echo
-echo 'You must be in the same directory as main.py for this to work'
+echo 'You must be in the same directory as cl_adsb.py for this to work'
 echo
 
 if [ "$#" -ne 1 ]
@@ -19,6 +19,6 @@ while true
  do
  clear
  date
- python main.py
+ python cl_adsb.py
  sleep $1
 done
