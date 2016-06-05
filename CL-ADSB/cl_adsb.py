@@ -92,7 +92,11 @@ class AdsB(object):
 
 if __name__ == '__main__':
 
-    adsb = AdsB()  # "http://sdrsharp.com:8080/virtualradar/AircraftList.json")
+    # Server setup
+    ###########################################################################
+    adsb = AdsB("http://192.168.1.55:8080/VirtualRadar/AircraftList.json")    # My local network server
+    # adsb = AdsB("http://sdrsharp.com:8080/virtualradar/AircraftList.json")  # Sdrsharps server
+    ###########################################################################
     adsb.parse()
 
     # Setup Pretty lille table
