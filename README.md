@@ -8,8 +8,11 @@ Easy configurable and upgradable, please see script itself.
 ![alt text](http://i.imgur.com/urKAuWn.png "CL-ADSB")
 
 CL-ADSB parses AircraftList.json feed coming from VirtualRadar server. If you have or find a public server just replace
+
 **http://sdrsharp.com:8080/virtualradar/desktop.html**
+
 with
+
 **http://sdrsharp.com:8080/virtualradar/AircraftList.json**
 
 To configure the server open cl_adsb.py file and close to the end change

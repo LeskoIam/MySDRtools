@@ -1,5 +1,6 @@
 import os
 import sys
+import argparse
 import requests
 from pprint import pprint
 from prettytable import PrettyTable
@@ -50,6 +51,14 @@ def feet_to_meters(feet, to_int=False):
         return feet
 
 
+def parse_args():
+    parser = argparse.ArgumentParser(description="CL-ADSB")
+    parser.add_argument("-s", type=str, dest="server_address", help="server address")
+    parser.add_argument("-c", help="count all aircraft", action="store_true", dest="all_count")
+    parser.add_argument("-m", help="count military aircraft", action="store_true", dest="mil_count")
+    return parser.parse_args()
+
+
 class AirCraft(object):
     """This class will hold single aircraft data.
     """
@@ -92,14 +101,22 @@ class AdsB(object):
 
 if __name__ == '__main__':
 
+    args = parse_args()
+
     # Server setup
     ###########################################################################
-    adsb = AdsB("http://192.168.1.55:8080/VirtualRadar/AircraftList.json")    # My local network server
-    # adsb = AdsB("http://sdrsharp.com:8080/virtualradar/AircraftList.json")  # Sdrsharps server
+    server_address = "http://192.168.1.55:8080/VirtualRadar/AircraftList.json"    # My local network server
+    # server_address = "http://sdrsharp.com:8080/virtualradar/AircraftList.json"  # Sdrsharps server
+    if args.server_address is not None:
+        server_address = args.server_address
+        if not server_address.endswith(".json"):
+            print "Server address is in wrong format. No .json found."
+            exit()
+    adsb = AdsB(server_address)
     ###########################################################################
     adsb.parse()
 
-    # Setup Pretty lille table
+    # Setup Pretty litle table
     planes_table = PrettyTable(["Icao", "Reg", "Call", "Sqk", "Alt", "Op", "Mil", "Lat", "Long"])
     planes_table.align["Op"] = "l"
     planes_table.align["Reg"] = "l"
@@ -128,11 +145,15 @@ if __name__ == '__main__':
                               feet_to_meters(plane.get_data("Alt"), to_int=True),
                               plane.get_data("Op"),
                               plane.get_data("Mil") if not plane.get_data("Mil") else add_color(plane.get_data("Mil"),
-                                                                                     color=bcolors.WARNING),
+                                                                                                color=bcolors.WARNING),
                               plane.get_data("Lat"),
                               plane.get_data("Long")])
 
     print planes_table
-    print "Mill count: " + str(m_count)
-    print "Slo count:  " + str(slo_count)
+    print args
+    if args.all_count:
+        print "All count: " + str(len(adsb.data))
+    if args.mil_count:
+        print "Mill count: " + str(m_count)
+    # print "Slo count:  " + str(slo_count)
     # plane.show_all_data()
