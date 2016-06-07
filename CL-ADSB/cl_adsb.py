@@ -150,7 +150,6 @@ if __name__ == '__main__':
                               plane.get_data("Long")])
 
     print planes_table
-    print args
     if args.all_count:
         print "All count: " + str(len(adsb.data))
     if args.mil_count:
