@@ -19,6 +19,6 @@ while true
  do
   clear
   date
-  python cl_adsb.py
+  python cl_adsb.py -c -m
   sleep $1
  done
