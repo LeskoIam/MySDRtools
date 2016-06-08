@@ -57,16 +57,6 @@ def feet_to_meters(feet, to_int=False):
         return feet
 
 
-# Setup argparser
-def parse_args():
-    parser = argparse.ArgumentParser(description="CL-ADSB")
-    parser.add_argument("-s", type=str, dest="server_address", help="server address")
-    parser.add_argument("-c", help="count all aircraft", action="store_true", dest="all_count")
-    parser.add_argument("-m", help="count military aircraft", action="store_true", dest="mil_count")
-    parser.add_argument("-im", help="use imperial measurements (feet)", action="store_true", dest="imperial")
-    return parser.parse_args()
-
-
 class AirCraft(object):
     """This class will hold single aircraft data.
     """
@@ -123,6 +113,16 @@ class AdsB(object):
                 aircraft.__setattr__(p, data_point)
             all_aircraft.append(aircraft)
         self.data = all_aircraft
+
+
+# Setup argparser
+def parse_args():
+    parser = argparse.ArgumentParser(description="CL-ADSB - Command line tool to display aircraft adsb information in a table.")
+    parser.add_argument("-s", type=str, dest="server_address", help="server address. Default is SDRSharps server.")
+    parser.add_argument("-c", help="count all aircraft", action="store_true", dest="all_count")
+    parser.add_argument("-m", help="count military aircraft", action="store_true", dest="mil_count")
+    parser.add_argument("-im", help="use imperial measurements (feet)", action="store_true", dest="imperial")
+    return parser.parse_args()
 
 
 def main():
@@ -189,8 +189,8 @@ def main():
         print "All count: {0}".format(len(adsb.data))
     if args.mil_count:
         print "Mill count: {0}".format(mil_count)
-    # print "Slo count:  {0}".format(slo_count)
-    # plane.show_all_data()
+        # print "Slo count:  {0}".format(slo_count)
+        # plane.show_all_data()
 
 
 if __name__ == '__main__':
