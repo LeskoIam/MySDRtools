@@ -33,4 +33,4 @@ with
 
 Point it to your server or some public one like [SDRSharp](http://sdrsharp.com:8080/virtualradar/desktop.html) and run it.
 
-If you are on Linux there is a sh script that runs it in a loop, check it out.
+There are bat (Win) and sh (Linux) scripts that run CL-ADSB in a loop, check it out.
