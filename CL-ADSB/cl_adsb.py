@@ -31,7 +31,7 @@ elif sys.platform.startswith("win"):
 
 
     def beep():
-        winsound.Beep(0.1, 2000)
+        winsound.Beep(2000, 100)
 
 
     def add_color(text, color=None):
@@ -178,8 +178,9 @@ def main():
             row.append(plane.get_data("Alt"))
         else:
             row.append(feet_to_meters(plane.get_data("Alt")))
+
         # Append all other data as they appear in header. First two are already handled
-        for cell in header[3:]:
+        for cell in header[len(row):]:
             row.append(plane.get_data(cell))
 
         planes_table.add_row(row=row)
