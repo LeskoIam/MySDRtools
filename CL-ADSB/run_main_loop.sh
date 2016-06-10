@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo 'CL-ADSB tool'
+echo 'CL-ADSB tool runner script.'
 echo
 echo 'You must be in the same directory as cl_adsb.py for this to work'
 echo

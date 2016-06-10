@@ -118,7 +118,8 @@ class AdsB(object):
 # Setup argparser
 def parse_args():
     parser = argparse.ArgumentParser(description="CL-ADSB - Command line tool to display aircraft adsb information in a table.")
-    parser.add_argument("-s", type=str, dest="server_address", help="server address. Default is SDRSharps server.")
+    parser.add_argument("-s", help="server address. Default is SDRSharps server.", type=str, dest="server_address")
+    parser.add_argument("-o", help="show long operator name", action="store_true", dest="show_long")
     parser.add_argument("-c", help="count all aircraft", action="store_true", dest="all_count")
     parser.add_argument("-m", help="count military aircraft", action="store_true", dest="mil_count")
     parser.add_argument("-im", help="use imperial measurements (feet)", action="store_true", dest="imperial")
@@ -154,7 +155,7 @@ def main():
     slo_count = 0
     for plane in adsb.data:
         # Restrict maximum number of characters in Operator name
-        if plane.get_data("Op") is not None and len(plane.get_data("Op")) > 11:
+        if not args.show_long and plane.get_data("Op") is not None and len(plane.get_data("Op")) > 11:
             plane.Op = plane.get_data("Op")[:7] + " ..."  # 7 + len(" ...") => 7 + 4 = 11
 
         # Fill row with plane data
@@ -173,7 +174,7 @@ def main():
             row.append(add_color(plane.get_data("Mil"), color=bcolors.WARNING))
         else:
             row.append(plane.get_data("Mil"))
-        # By default
+        # By default altitude is shown in metric system.
         if args.imperial:
             row.append(plane.get_data("Alt"))
         else:
