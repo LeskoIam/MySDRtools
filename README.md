@@ -10,13 +10,14 @@ Easy configurable and upgradable, please see script itself.
 CL-ADSB now supports command line arguments.
 ```
 $ python cl_adsb.py -h
-usage: cl_adsb.py [-h] [-s SERVER_ADDRESS] [-c] [-m] [-im]
+usage: cl_adsb.py [-h] [-s SERVER_ADDRESS] [-o] [-c] [-m] [-im]
 
 CL-ADSB - Command line tool to display aircraft adsb information in a table.
 
 optional arguments:
   -h, --help         show this help message and exit
   -s SERVER_ADDRESS  server address. Default is SDRSharps server.
+  -o                 don't shorten operator names
   -c                 count all aircraft
   -m                 count military aircraft
   -im                use imperial measurements (feet)

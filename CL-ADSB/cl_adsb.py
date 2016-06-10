@@ -119,7 +119,7 @@ class AdsB(object):
 def parse_args():
     parser = argparse.ArgumentParser(description="CL-ADSB - Command line tool to display aircraft adsb information in a table.")
     parser.add_argument("-s", help="server address. Default is SDRSharps server.", type=str, dest="server_address")
-    parser.add_argument("-o", help="show long operator name", action="store_true", dest="show_long")
+    parser.add_argument("-o", help="don't shorten operator names", action="store_true", dest="show_long")
     parser.add_argument("-c", help="count all aircraft", action="store_true", dest="all_count")
     parser.add_argument("-m", help="count military aircraft", action="store_true", dest="mil_count")
     parser.add_argument("-im", help="use imperial measurements (feet)", action="store_true", dest="imperial")
@@ -191,8 +191,9 @@ def main():
         print "All count: {0}".format(len(adsb.data))
     if args.mil_count:
         print "Mill count: {0}".format(mil_count)
-        # print "Slo count:  {0}".format(slo_count)
-        # plane.show_all_data()
+
+    # print "Slo count:  {0}".format(slo_count)
+    # plane.show_all_data()
 
 
 if __name__ == '__main__':
